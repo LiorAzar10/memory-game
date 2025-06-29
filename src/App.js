@@ -84,7 +84,7 @@ function shuffleArray(array) {
 
   }
 
-  const startNewGame = () => {
+  const resetGame = () => {
     const doubled = [...emojis, ...emojis].map((emoji, index) => ({
       id: index,
       value: emoji,
@@ -102,16 +102,21 @@ function shuffleArray(array) {
 
   return (
     <div className="app">
-      <h1>🎴 משחק זיכרון</h1>
+      <h1>Memory Game🎴</h1>
       <div className="moves-counter">
         Moves: <strong>{movesCounter}</strong>
       </div>
       {gameWon && (
-    <div className="win-message">
-      🎉 Congratulations! You won the game in {movesCounter} moves!
-    </div>
-  )}
-  <button className="reset-button" onClick={startNewGame}>
+  <div className="victory-screen">
+    <div className="trophy">🏆</div>
+    <h2>victory!</h2>
+    <p>🎉 Congratulations! You won the game in <strong>{movesCounter}</strong> moves!</p>
+    <button className="restart-btn" onClick={resetGame}>
+        🔄 Reset Game
+  </button>
+  </div>
+)}
+  <button className="restart-btn" onClick={resetGame}>
     🔄 Reset Game
   </button>
       <div className="grid">
