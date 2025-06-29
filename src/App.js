@@ -13,6 +13,7 @@ function App() {
 
   const [cards, setCards] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
+  const [gameWon, setGameWon] = useState(false);
 
 function shuffleArray(array) {
   return array
@@ -76,13 +77,27 @@ function shuffleArray(array) {
       }
 
      }
+    if(pairsCounter == emojis.length) {setGameWon(true)};
+
      setTimeout(() => {
-     if(pairsCounter == emojis.length)
-     {
-        alert(`victory! you won in ${movesCounter} movess`);
-     }
     }, 500);
 
+  }
+
+  const startNewGame = () => {
+    const doubled = [...emojis, ...emojis].map((emoji, index) => ({
+      id: index,
+      value: emoji,
+      isFlipped: false,
+      isMatched: false
+    }));
+    
+    const shuffled = shuffleArray(doubled);
+    setCards(shuffled);
+    setSelectedCards([]);
+    movesCounter = 0;
+    pairsCounter = 0;
+    setGameWon(false);
   }
 
   return (
@@ -91,6 +106,14 @@ function shuffleArray(array) {
       <div className="moves-counter">
         Moves: <strong>{movesCounter}</strong>
       </div>
+      {gameWon && (
+    <div className="win-message">
+      🎉 Congratulations! You won the game in {movesCounter} moves!
+    </div>
+  )}
+  <button className="reset-button" onClick={startNewGame}>
+    🔄 Reset Game
+  </button>
       <div className="grid">
         {cards.map((card) => (
           <Card
