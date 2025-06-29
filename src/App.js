@@ -6,6 +6,8 @@ import Card from './components/Card'
 
 const emojis = ['🐸', '🐱', '🦁', '🐶', '🐼', '🐵', '🐯', '🐷'];
 let busy = false;
+let pairsCounter = 0;
+let movesCounter = 0;
 
 function App() {
 
@@ -47,6 +49,7 @@ function shuffleArray(array) {
      setSelectedCards(newSelected);
 
      if (newSelected.length === 2) {
+      movesCounter = movesCounter+1;
       busy = true;
 
       const [first, second] = newSelected;
@@ -57,6 +60,7 @@ function shuffleArray(array) {
               : card
           ));
           setSelectedCards([]);
+          pairsCounter = pairsCounter+1;
           busy = false;
       }
       else{
@@ -72,12 +76,21 @@ function shuffleArray(array) {
       }
 
      }
+     setTimeout(() => {
+     if(pairsCounter == emojis.length)
+     {
+        alert(`victory! you won in ${movesCounter} movess`);
+     }
+    }, 500);
 
   }
 
   return (
     <div className="app">
       <h1>🎴 משחק זיכרון</h1>
+      <div className="moves-counter">
+        Moves: <strong>{movesCounter}</strong>
+      </div>
       <div className="grid">
         {cards.map((card) => (
           <Card

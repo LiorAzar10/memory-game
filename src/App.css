@@ -48,3 +48,8 @@
   gap: 15px;
   justify-content: center;
 }
+
+.moves-counter {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
