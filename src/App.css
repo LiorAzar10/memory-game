@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.app {
+  text-align: center;
+  padding: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  gap: 15px;
+  justify-content: center;
+}
